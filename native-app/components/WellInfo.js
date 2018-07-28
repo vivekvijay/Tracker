@@ -1,19 +1,26 @@
 import React from 'react';
 import { ScrollView, Text, View, StyleSheet, YellowBox, Dimensions } from 'react-native';
+import { wellInfo } from '../data';
 
 export default class WellInfo extends React.Component {
     render() {
-        const window = Dimensions.get('window'),
-            windowWidth = window.width,
-            windowHeight = window.height;
         return (
             <ScrollView pagingEnabled={true} horizontal={true} style={styles.container} >
-                <View style={styles.block}>
-                    <Text style={styles.title}>1</Text>
-                </View>
-                <View style={styles.block}>
-                    <Text style={styles.title}>8</Text>
-                </View>
+                {wellInfo.types.map((type,index)=>(
+                    <View key={index} style={styles.block}>
+                        <Text style={styles.title}>{type.title}</Text>
+                        <View style={styles.content}>
+                            <ScrollView >
+                                {type.data.map((info,index)=>(
+                                    <View key={index}>
+                                        <Text style={styles.infoLabel} >{info.label}</Text>
+                                        <Text>{info.value}</Text>
+                                    </View>
+                                ))}
+                            </ScrollView>
+                        </View>
+                    </View>                    
+                ))}
             </ScrollView>
         )
     }
@@ -21,25 +28,33 @@ export default class WellInfo extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        height: '100%',
         flex: 1,
-        backgroundColor: 'yellow'
     },
     block: {
         width: Dimensions.get('window').width / 2,
-        padding: '2%',
-        backgroundColor: 'white',
-        height: '100%'
+        paddingBottom: '2%',
+        paddingLeft: '2%',
+        paddingRight: '2%',
+        backgroundColor: 'white'
     },
     title: {
-        color: '#929e9a'
+        color: '#929e9a',
+        flex:0.05,
+        textAlign:'center',
+        padding:'2%',
     },
     content: {
-        backgroundColor: '#cccccc',
+        backgroundColor: '#cbcbcb',
         borderColor: '#7f7f7f',
         borderWidth: 4,
-        height: '100%',
-        width: '100%'
+        flex:0.95,
+        paddingTop:'2%',
+        paddingBottom:'2%',
+        paddingLeft:'4%',
+        paddingRight:'4%'
+    },
+    infoLabel:{
+        fontSize:10,
+        color:'#808080'
     }
 });
