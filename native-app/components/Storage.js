@@ -13,8 +13,9 @@ export default class Storage extends React.Component {
                 compartments: [
                     {
                         id: 'COMPARTMENT #4',
-                        well:'20/40 WHITE',
-                        capacity:'47,280 LBS',
+                        well: '20/40 WHITE',
+                        capacity: '47,280 LBS',
+                        type: 1,
                         records: [
                             {
                                 no: '3115',
@@ -24,16 +25,59 @@ export default class Storage extends React.Component {
                     },
                     {
                         id: 'COMPARTMENT #3',
-                        well:'20/40 WHITE',
-                        capacity:'46,920 LBS'
+                        well: '20/40 WHITE',
+                        capacity: '46,920 LBS',
+                        type: 1
                     },
                     {
                         id: 'COMPARTMENT #4',
-                        well:'40/70 CRC',
-                        capacity:'95,480 LBS'
+                        well: '40/70 CRC',
+                        type: 2,
+                        capacity: '95,480 LBS'
                     },
                     {
                         id: '',
+                        type: 2,
+                        records: [
+                            {
+                                no: '3115',
+                                name: 'D&J'
+                            }
+                        ]
+                    }
+                ]
+
+            },
+            {
+                name: 'OUTSIDE#33124',
+                compartments: [
+                    {
+                        id: 'COMPARTMENT #4',
+                        well: '20/40 WHITE',
+                        capacity: '47,280 LBS',
+                        type: 1,
+                        records: [
+                            {
+                                no: '3115',
+                                name: 'D&J'
+                            }
+                        ]
+                    },
+                    {
+                        id: 'COMPARTMENT #3',
+                        well: '20/40 WHITE',
+                        capacity: '46,920 LBS',
+                        type: 1
+                    },
+                    {
+                        id: 'COMPARTMENT #4',
+                        well: '40/70 CRC',
+                        type: 2,
+                        capacity: '95,480 LBS'
+                    },
+                    {
+                        id: '',
+                        type: 2,
                         records: [
                             {
                                 no: '3115',
@@ -47,25 +91,20 @@ export default class Storage extends React.Component {
         ];
         return (
             <ScrollView pagingEnabled={true} horizontal={true} style={styles.container} >
-                {/* <View style={styles.well}>
-                    <Text style={styles.wellName}>1</Text>
-                    <View style={styles.wellContent}></View>
-                </View>
-                <View style={styles.well}>
-                    <Text style={styles.wellName}>1</Text>
-                    <View style={styles.wellContent}></View>
-                </View> */}
 
                 {
-                    wellDetails.map((well, index) => {
-                        return <View key={`well-${index}`} style={styles.well}>
-                            <Text style={styles.wellName}>{well.name}</Text>
-                            <View style={styles.wellContent}>
-                                {
-                                    well.details.map((detail, i) => {
-                                        return <View key={i} style={styles.block}>
-                                            <Text style={styles.time}>{detail.time}</Text>
-                                            {detail.records && detail.records.map((record, j) => {
+                    storageDetails.map((storage, index) => {
+                        return <View key={`storage-${index}`} style={styles.well}>
+                            <Text style={styles.wellName}>{storage.name}</Text>
+                            {storage.compartments.map((compartment, c) => {
+                                return <View key={c} style={compartment.type == 1 ? styles.container1 : styles.container2}>
+                                    <View style={styles.headerContainer}>
+                                        <Text style={styles.text}>{compartment.id}</Text>
+                                    </View>
+                                    <View style={styles.compartmentContent}>
+                                        <Text style={styles.compartmentID}>{compartment.well}</Text>
+                                        <View style={styles.block}>
+                                            {compartment.records && compartment.records.map((record, j) => {
                                                 return <View key={j} style={styles.subBlock}>
                                                     <View style={styles.subBlockText1Container}>
                                                         <Text style={styles.subBlockText1}>{record.no}</Text>
@@ -73,17 +112,14 @@ export default class Storage extends React.Component {
                                                     <View style={styles.subBlockText2Container}>
                                                         <Text style={styles.subBlockText2}>{record.name}</Text>
                                                     </View>
-                                                    {/* <Text style={styles.subBlockText2}>{record.name}</Text> */}
                                                 </View>
                                             })}
-
                                         </View>
-
-                                    })
-                                }
-
-
-                            </View>
+                                        <Text style={styles.compartmentID}>{compartment.capacity}</Text>
+                                    </View>
+                                </View>
+                            })
+                            }
                         </View>
                     })
                 }
@@ -92,48 +128,76 @@ export default class Storage extends React.Component {
     }
 }
 
-
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: '100%',
-        flex: 1
+        height: '100%'
     },
     well: {
         width: Dimensions.get('window').width / 2,
         padding: '2%',
-        backgroundColor: 'white',
         height: '100%',
         alignItems: 'center'
     },
     wellName: {
-        marginTop: 5,
+        marginTop: 8,
         marginBottom: 10
     },
-    title: {
-        color: '#929e9a'
-    },
-    wellContent: {
-        backgroundColor: '#eaeaea',
-        borderColor: '#7f7f7f',
-        borderWidth: 4,
-        height: '95%',
+    container1: {
+        // flex:2.2,
+        height: '20%',
         width: '100%',
-        padding: '3%'
+        borderWidth: 4,
+        marginBottom: 8,
+        borderColor: '#38a880'
+    },
+    container2: {
+        // flex:3.2,
+        height: '25%',
+        width: '100%',
+        borderWidth: 4,
+        marginBottom: 8,
+        borderColor: '#38a880'
+    },
+    headerContainer: {
+        width: '100%',
+        height: '20%',
+        flex: 0.2,
+        backgroundColor: '#38a880',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    text: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white'
+    },
+    compartmentID: {
+        flex: 1
+    },
+    compartmentContent: {
+        alignItems: 'center',
+        backgroundColor: '#cdfdef',
+        flex: 0.8,
+        paddingLeft: '2%',
+        paddingRight: '2%'
+    },
+    greyText: {
+        color: 'grey'
     },
     block: {
-        height: '32%'
+        height: '50%'
     },
     subBlock: {
         width: '100%',
         backgroundColor: 'white',
         flexDirection: 'row',
         marginTop: 5,
-        height: 40,
         borderRadius: 15,
         borderColor: '#999999',
         borderWidth: 3,
-        flex: 0.25,
+        height:25,
         alignItems: 'center'
     },
     subBlockText1Container: {
@@ -151,9 +215,5 @@ const styles = StyleSheet.create({
     },
     subBlockText2: {
         fontSize: 14
-    },
-    time: {
-        color: '#929e9a',
-        fontSize:15
     }
 });

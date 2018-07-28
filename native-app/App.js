@@ -2,6 +2,8 @@ import React from 'react';
 import { ScrollView, View, Text, StyleSheet, YellowBox, Dimensions } from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 import WellInfo from './components/WellInfo';
+import Material from './components/Material';
+import Storage from './components/Storage';
 import { levels } from './data';
 
 const window = Dimensions.get('window');
@@ -38,10 +40,10 @@ export default class App extends React.Component {
 				return (
 					<View style={styles.content}>
 						<View style={styles.leftBlock}>
-							<View></View>
+							<Material/>
 						</View>
 						<View style={styles.rightBlock}>
-							<View></View>
+							<Storage/>
 						</View>
 					</View>
 				);

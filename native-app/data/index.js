@@ -16,7 +16,7 @@ export const levels = [
 	{
 		tab: 2,
 		content: {
-			backgroundColor:'#9cfce2',
+			backgroundColor:'#cdfdef',
 			panels:[
 				{
 					title:'MATERIAL'

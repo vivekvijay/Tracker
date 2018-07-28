@@ -158,7 +158,6 @@ export default class Material extends React.Component {
                                                     <View style={styles.subBlockText2Container}>
                                                         <Text style={styles.subBlockText2}>{record.name}</Text>
                                                     </View>
-                                                    {/* <Text style={styles.subBlockText2}>{record.name}</Text> */}
                                                 </View>
                                             })}
 
@@ -181,18 +180,16 @@ export default class Material extends React.Component {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: '100%',
-        flex: 1
+        height: '100%'
     },
     well: {
         width: Dimensions.get('window').width / 2,
         padding: '2%',
-        backgroundColor: 'white',
         height: '100%',
         alignItems: 'center'
     },
     wellName: {
-        marginTop: 5,
+        // marginTop: 5,
         marginBottom: 10
     },
     title: {

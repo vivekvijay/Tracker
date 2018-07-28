@@ -34,8 +34,7 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width / 2,
         paddingBottom: '2%',
         paddingLeft: '2%',
-        paddingRight: '2%',
-        backgroundColor: 'white'
+        paddingRight: '2%'
     },
     title: {
         color: '#929e9a',
