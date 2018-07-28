@@ -3,6 +3,7 @@ import { ScrollView, View, Text, StyleSheet, YellowBox, Dimensions } from 'react
 import Accordion from 'react-native-collapsible/Accordion';
 import WellInfo from './components/WellInfo';
 import Material from './components/Material';
+import StageInfo from './components/StageInfo';
 import Storage from './components/Storage';
 import { levels } from './data';
 
@@ -32,7 +33,7 @@ export default class App extends React.Component {
 							<WellInfo />
 						</View>
 						<View style={styles.rightBlock}>
-							<WellInfo />
+							<StageInfo />
 						</View>
 					</View>
 				);
